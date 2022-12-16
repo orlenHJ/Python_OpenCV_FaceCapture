@@ -1,0 +1,24 @@
+import cv2 as cv
+def face_detect_demo(img):
+    gary = cv.cvtColor(img,cv.COLOR_BGR2GRAY)
+    face_detect = cv.CascadeClassifier('D:/OpenCV/opencv/sources/data/haarcascades/haarcascade_frontalface_alt2.xml')
+    face = face_detect.detectMultiScale(gary,1.15,5,0,(100,100),(500,500))   #这里可以对不同项目类型具体情况进行调节
+    for x,y,w,h in face:
+        cv.rectangle(img,(x,y),(x+w,y+h),color = (0,0,255),thickness = 5)
+    cv.imshow('result',img)
+
+
+# cap = cv.VideoCapture(0)    # 0 指默认的摄像头 1...为其它摄像头  字符串就是打开视频文件
+# cap.read()
+cap = cv.VideoCapture('2.mp4')  #读取视频
+
+while True:
+    flag,frame = cap.read()
+    cv.namedWindow("result", 0)
+    if not flag:
+        break
+    face_detect_demo(frame)
+    if ord('q') == cv.waitKey(1):   # 0是图片或视频第一帧 1是视频
+        break
+
+cap.release()
