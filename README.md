@@ -1,0 +1,2 @@
+# Python_OpenCV_FaceCapture
+简单应用OpenCV训练好的人脸识别
